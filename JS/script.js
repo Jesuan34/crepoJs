@@ -1,4 +1,49 @@
 
+
+function Producto(marca, modelo, grains, precio){
+    this.marca = marca;
+
+    this.modelo = modelo;
+    
+    this.grains = grains;
+
+    this.precio = precio;
+ }
+
+
+const Linea1 = new Producto ("Grey Gull", "Classic", "60 grains", 8.399);
+const Linea2 = new Producto ("Grey Gull", "Long Distance", "60 grains", 6.399);
+const Linea3 = new Producto ("Airflo", "Forge", "100 grains", 8.733);
+const Linea4 = new Producto ("Airflo", "Forge", "120 grains", 8.733);
+const Linea5 = new Producto ("Airflo", "Forge", "140 grains", 8.733);
+const Linea6 = new Producto ("Airflo", "Forge", "160 grains", 8.733);
+const Linea7 = new Producto ("Rio", "Avid Trout", "186 grains", 9.570);
+const Linea8 = new Producto ("Rio", "Avid Trout", "210 grains", 9.570);
+const Linea9 = new Producto ("Scientific Angler", "Grand Slam", "240 grains", 20.425);
+const Linea10 = new Producto ("Cortland", "Preciscion", "280 grains", 9.480);
+const Linea11 = new Producto ("Cortland", "Lazer Hundimiento", "330 grains", 7.031);
+const Linea12 = new Producto ("Airflo", "Ridge Clear Agua Salada", "380 grains", 10.093);
+const Linea13 = new Producto ("Airflo", "Ridge Clear Agua Salada", "450 grains", 10.093);
+const Linea14 = new Producto ("Airflo", "Ridge Clear Agua Salada", "500 grains", 10.093);
+const Linea15 = new Producto ("Airflo", "Ridge Clear Agua Salada", "550 grains", 10.093);
+
+
+
+const ProductoLineas = [Linea1, Linea2, Linea3, Linea4, Linea5, 
+                        Linea6, Linea7, Linea8, Linea9, Linea10, 
+                        Linea11, Linea12, Linea13, Linea14, Linea15];
+                    
+
+for (const Producto of ProductoLineas) {
+    console.log(Producto.marca);
+    console.log(`\$ ${Producto.precio}`)
+    
+}
+
+
+
+
+
 alert("Averigue que linea de pesca necesita para su caña de flyfishing");
 
 let numeroCaña = parseInt(prompt("Ingrese el numero de su caña (1-15)"));
@@ -81,7 +126,7 @@ switch (numeroCaña) {
         break;
     default:
         alert("Desea aprender? ingrese a https://proyecto-outdoor.vercel.app/secciones/actividades o dejenos su e-mail a continuacion que nosotros lo contactamos")
-        parent(prompt("Ingrese su e-mail para enseñarle mas sobre Flyfishing"))
+        prompt("Ingrese su e-mail para enseñarle mas sobre Flyfishing")
         break;
 }
 
