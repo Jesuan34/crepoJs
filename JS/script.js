@@ -11,21 +11,21 @@ function Producto(marca, modelo, grains, precio){
  }
 
 
-const Linea1 = new Producto ("Grey Gull", "Classic", "60 grains", 8.399);
-const Linea2 = new Producto ("Grey Gull", "Long Distance", "60 grains", 6.399);
-const Linea3 = new Producto ("Airflo", "Forge", "100 grains", 8.733);
-const Linea4 = new Producto ("Airflo", "Forge", "120 grains", 8.733);
-const Linea5 = new Producto ("Airflo", "Forge", "140 grains", 8.733);
-const Linea6 = new Producto ("Airflo", "Forge", "160 grains", 8.733);
-const Linea7 = new Producto ("Rio", "Avid Trout", "186 grains", 9.570);
-const Linea8 = new Producto ("Rio", "Avid Trout", "210 grains", 9.570);
-const Linea9 = new Producto ("Scientific Angler", "Grand Slam", "240 grains", 20.425);
-const Linea10 = new Producto ("Cortland", "Preciscion", "280 grains", 9.480);
-const Linea11 = new Producto ("Cortland", "Lazer Hundimiento", "330 grains", 7.031);
-const Linea12 = new Producto ("Airflo", "Ridge Clear Agua Salada", "380 grains", 10.093);
-const Linea13 = new Producto ("Airflo", "Ridge Clear Agua Salada", "450 grains", 10.093);
-const Linea14 = new Producto ("Airflo", "Ridge Clear Agua Salada", "500 grains", 10.093);
-const Linea15 = new Producto ("Airflo", "Ridge Clear Agua Salada", "550 grains", 10.093);
+const Linea1 = new Producto ("Grey Gull", "Classic", "60 grains", 8399);
+const Linea2 = new Producto ("Grey Gull", "Long Distance", "60 grains", 6399);
+const Linea3 = new Producto ("Airflo", "Forge", "100 grains", 8733);
+const Linea4 = new Producto ("Airflo", "Forge", "120 grains", 8733);
+const Linea5 = new Producto ("Airflo", "Forge", "140 grains", 8733);
+const Linea6 = new Producto ("Airflo", "Forge", "160 grains", 8733);
+const Linea7 = new Producto ("Rio", "Avid Trout", "186 grains", 9570);
+const Linea8 = new Producto ("Rio", "Avid Trout", "210 grains", 9570);
+const Linea9 = new Producto ("Scientific Angler", "Grand Slam", "240 grains", 20425);
+const Linea10 = new Producto ("Cortland", "Preciscion", "280 grains", 9480);
+const Linea11 = new Producto ("Cortland", "Lazer Hundimiento", "330 grains", 7031);
+const Linea12 = new Producto ("Airflo", "Ridge Clear Agua Salada", "380 grains", 10093);
+const Linea13 = new Producto ("Airflo", "Ridge Clear Agua Salada", "450 grains", 10093);
+const Linea14 = new Producto ("Airflo", "Ridge Clear Agua Salada", "500 grains", 10093);
+const Linea15 = new Producto ("Airflo", "Ridge Clear Agua Salada", "550 grains", 10093);
 
 
 
@@ -36,7 +36,9 @@ const ProductoLineas = [Linea1, Linea2, Linea3, Linea4, Linea5,
 
 for (const Producto of ProductoLineas) {
     console.log(Producto.marca);
-    console.log(`\$ ${Producto.precio}`)
+    console.log(Producto.modelo);
+    console.log(`\$ ${Producto.precio}`);
+    
     
 }
 
@@ -137,93 +139,78 @@ if (valorLinea === "si") {
     const iva = y => y * 0.21
     switch (numeroCaña) {
         case 1:
-            let precio = 1500
-            let ivaPrecio = iva(precio);
-            let sumaPrecioIva = suma(precio, ivaPrecio);
-            alert("$ " + sumaPrecioIva)
+            let ivaPrecio = iva(Linea1.precio);
+            let sumaPrecioIva = suma(Linea1.precio, ivaPrecio);
+            alert(`\$ ${sumaPrecioIva}`)
             break;
         case 2:
-            let precioA = 2000
-            let ivaPrecioA = iva(precioA);
-            let sumaPrecioIvaA = suma(precioA, ivaPrecioA);
+            let ivaPrecioA = iva(Linea2.precio);
+            let sumaPrecioIvaA = suma(Linea2.precio, ivaPrecioA);
             alert("$ " + sumaPrecioIvaA)
             break;
         case 3:
-            let precioB = 2500
-            let ivaPrecioB = iva(precioB);
-            let sumaPrecioIvaB = suma(precioB, ivaPrecioB);
+            let ivaPrecioB = iva(Linea3.precio);
+            let sumaPrecioIvaB = suma(Linea3.precio, ivaPrecioB);
             alert("$ " + sumaPrecioIvaB)
             break;
         case 4:
-            let precioC = 3000
-            let ivaPrecioC = iva(C);
-            let sumaPrecioIvaC = suma(precioC, ivaPrecioC);
+            let ivaPrecioC = iva(Linea4.precio)
+            let sumaPrecioIvaC = suma(Linea4.precio, ivaPrecioC);
             alert("$ " + sumaPrecioIvaC)
             break;
         case 5:
-            let precioD = 3500
-            let ivaPrecioD = iva(precioD);
-            let sumaPrecioIvaD = suma(precioD, ivaPrecioD);
+            let ivaPrecioD = iva(Linea5.precio);
+            let sumaPrecioIvaD = suma(Linea5.precio, ivaPrecioD);
             alert("$ " + sumaPrecioIvaD)
             break;
         case 6:
-            let precioE = 4000
-            let ivaPrecioE = iva(precioE);
-            let sumaPrecioIvaE = suma(precioE, ivaPrecioE);
+            let ivaPrecioE = iva(Linea6.precio);
+            let sumaPrecioIvaE = suma(Linea6.precio, ivaPrecioE);
             alert("$ " + sumaPrecioIvaE)
             break;
         case 7:
-            let precioF = 4500
-            let ivaPrecioF = iva(precioF);
-            let sumaPrecioIvaF = suma(precioF, ivaPrecioF);
+            let ivaPrecioF = iva(Linea7.precio);
+            let sumaPrecioIvaF = suma(Linea7.precio, ivaPrecioF);
             alert("$ " + sumaPrecioIvaF)
             break;
         case 8:
-            let precioG = 5000
-            let ivaPrecioG = iva(precioG);
-            let sumaPrecioIvaG = suma(precioG, ivaPrecioG);
+            let ivaPrecioG = iva(Linea8.precio);
+            let sumaPrecioIvaG = suma(Linea8.precio, ivaPrecioG);
             alert("$ " + sumaPrecioIvaG)
             break;
         case 9:
-            let precioH = 5500
-            let ivaPrecioH = iva(precioH);
-            let sumaPrecioIvaH = suma(precioH, ivaPrecioH);
+            let ivaPrecioH = iva(Linea9.precio);
+            let sumaPrecioIvaH = suma(Linea9.precio, ivaPrecioH);
             alert("$ " + sumaPrecioIvaH)
             break;
         case 10:
-            let precioI = 6000
-            let ivaPrecioI = iva(precioI);
-            let sumaPrecioIvaI = suma(precioI, ivaPrecioI);
+            let ivaPrecioI = iva(Linea10.precio);
+            let sumaPrecioIvaI = suma(Linea10.precio, ivaPrecioI);
             alert("$ " + sumaPrecioIvaI)
             break;
         case 11:
-            let precioJ = 6500
-            let ivaPrecioJ = iva(J);
-            let sumaPrecioIvaJ = suma(precioJ, ivaPrecioJ);
+            let ivaPrecioJ = iva(Linea11.precio )
+            let sumaPrecioIvaJ = suma(Linea11.precio, ivaPrecioJ);
             alert("$ " + sumaPrecioIvaJ)
             break;
         case 12:
-            let precioK = 7000
-            let ivaPrecioK = iva(precioK);
-            let sumaPrecioIvaK = suma(precioK, ivaPrecioK);
+            let ivaPrecioK = iva(Linea12.precio);
+            let sumaPrecioIvaK = suma(Linea12.precio, ivaPrecioK);
             alert("$ " + sumaPrecioIvaK)
             break;
         case 13:
-            let precioL = 7500
-            let ivaPrecioL = iva(precioL);
-            let sumaPrecioIvaL = suma(precioL, ivaPrecioL);
+            let ivaPrecioL = iva(Linea13.precio);
+            let sumaPrecioIvaL = suma(Linea13.precio, ivaPrecioL);
             alert("$ " + sumaPrecioIvaL)
             break;
         case 14:
-            let precioM = 8000
-            let ivaPrecioM = iva(precioM);
-            let sumaPrecioIvaM = suma(precioM, ivaPrecioM);
+            let ivaPrecioM = iva(Linea14.precio);
+            let sumaPrecioIvaM = suma(Linea14.precio, ivaPrecioM);
             alert("$ " + sumaPrecioIvaM)
             break;
         case 15:
-            let precioN = 8500
-            let ivaPrecioN = iva(precioN);
-            let sumaPrecioIvaN = suma(precioN, ivaPrecioN);
+            let ivaPrecioN = iva(Linea15.precio);
+            let sumaPrecioIvaN = suma(Linea15.precio, ivaPrecioN);
             alert("$ " + sumaPrecioIvaN)
             break;
     }
