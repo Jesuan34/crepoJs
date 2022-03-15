@@ -42,6 +42,15 @@ for (const Producto of ProductoLineas) {
     
 }
 
+const btn= document.createElement("button");
+btn.innerHTML = "Mas Lineas";
+pescaFina.append(btn);
+const btn1= document.createElement("button");
+btn1.innerHTML = "Mas Lineas";
+pescaTodoTerreno.append(btn1);
+const btn2= document.createElement("button");
+btn2.innerHTML = "Mas Lineas";
+pescaPesada.append(btn2);
 
 
 
