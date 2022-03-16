@@ -52,10 +52,20 @@ const btn2= document.createElement("button");
 btn2.innerHTML = "Mas Lineas";
 pescaPesada.append(btn2);
 
+let contador = 0;
+
+function sumaClick () {
+
+    let boton = document.getElementById("btnSearch")
+    boton.onclick = () => (++contador)
+    console.log(contador)    
+}
 
 
 
-alert("Averigue que linea de pesca necesita para su caña de flyfishing");
+
+
+/*alert("Averigue que linea de pesca necesita para su caña de flyfishing");
 
 let numeroCaña = parseInt(prompt("Ingrese el numero de su caña (1-15)"));
 
@@ -226,5 +236,5 @@ if (valorLinea === "si") {
 } else {
     alert("Que tengas buena jornada")
 }
-
+*/
 
