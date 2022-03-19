@@ -37,29 +37,10 @@ const ProductoLineas = [Linea1, Linea2, Linea3, Linea4, Linea5,
 for (const Producto of ProductoLineas) {
     console.log(Producto.marca);
     console.log(Producto.modelo);
-    console.log(`\$ ${Producto.precio}`);
-    
+    console.log(`\$ ${Producto.precio}`);   
     
 }
 
-const btn= document.createElement("button");
-btn.innerHTML = "Mas Lineas";
-pescaFina.append(btn);
-const btn1= document.createElement("button");
-btn1.innerHTML = "Mas Lineas";
-pescaTodoTerreno.append(btn1);
-const btn2= document.createElement("button");
-btn2.innerHTML = "Mas Lineas";
-pescaPesada.append(btn2);
-
-let contador = 0;
-
-function sumaClick () {
-
-    let boton = document.getElementById("btnSearch")
-    boton.onclick = () => (++contador)
-    console.log(contador)    
-}
 
 
 
