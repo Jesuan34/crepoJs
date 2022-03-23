@@ -1,0 +1,1 @@
+btnCarrito.onclick = mostrarCarrito;
