@@ -122,16 +122,15 @@ function calcularTotal() {
 
 
 function vaciarCarrito() {
-    // Limpiamos los productos guardados
+   
     carrito = [];
-    // Renderizamos los cambios
+    
     renderizarCarrito();
 }
 
 
 botonVaciar.addEventListener('click', vaciarCarrito);
 
-// Inicio
 
 renderizarCarrito();
 
