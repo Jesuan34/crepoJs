@@ -1,41 +1,144 @@
 
+let carrito = [];
+const divisa = '$';
+const seccionItems = document.getElementById("seccionGeneral");
+const seccionCarrito = document.getElementById("seccionCarrito");
+const total = document.getElementById("total");
+const botonVaciar = document.getElementById("botonVaciar");
+
+
 
 for (const productos of productoLineas) {
     const divCard = document.createElement("div");
-    const imgCard = document.createElement("img");
-    const divCardBody = document.createElement("div");
-    const nombreProducto = document.createElement("h3");
-    const precioProducto = document.createElement("h4");
-    const btnAdd = document.createElement("button");
-
     divCard.className = "col col-4 card";
+    
+    const imgCard = document.createElement("img");
     imgCard.className = "card-img-top";
-    divCardBody.className = "card-body";
-    nombreProducto.className = "card-title";
-    precioProducto.className = "card-text";
-    btnAdd.className = "btn btn-primary";
-
     //imgCard.src = productos.img;
+
+    const divCardBody = document.createElement("div");
+    divCardBody.className = "card-body";
+
+    const nombreProducto = document.createElement("h3");
+    nombreProducto.className = "card-title";
     nombreProducto.append(productos.marca, productos.modelo);
-    precioProducto.append(`\$ ${productos.precio}`)
-    btnAdd.append("Comprar")
-    btnAdd.id = productos.id;
 
-    btnAdd.onclick = () => {
-        const comprado = productos.find(productos => productos.id === btnAdd.id);
-        productoCarrito.push({ nombre: comprado.modelo, precio: comprado.precio })
-        localStorage.setItem("carrito", JSON.stringify(productoCarrito))
-    }
+    const precioProducto = document.createElement("h4");
+    precioProducto.className = "card-text";
+    precioProducto.append(`\$ ${productos.precio}`);
 
-    divCardBody.append(nombreProducto, precioProducto, btnAdd);
+    const btnCard = document.createElement("button");
+    btnCard.className = "btn btn-primary";
+    btnCard.append("Comprar");
+    btnCard.id = productos.id;
+    btnCard.addEventListener("click", addProductoAlCarrito);
+
+    divCardBody.append(nombreProducto, precioProducto, btnCard);
 
     divCard.append(imgCard, divCardBody);
 
     seccionGeneral.append(divCard);
+
+}
+
+function addProductoAlCarrito(evento) {
+    
+    carrito.push(evento.target.getElementById(producto.id))
+
+
+    renderizarCarrito();
+
 }
 
 
-//seccion carrito
+function renderizarCarrito() {
+
+
+    seccionCarrito.innerHTML = '';
+
+
+    const carritoSinDuplicados = [...new Set(carrito)];
+
+
+    carritoSinDuplicados.forEach((item) => {
+
+
+        const miItem = productos.filter((itemProducto) => {
+
+            return itemProducto.id === parseInt(item);
+        });
+
+        const numeroUnidadesItem = carrito.reduce((total, itemId) => {
+
+
+            return itemId === item ? total += 1 : total;
+        }, 0);
+
+        //item del carrito
+        const itemCarrito = document.createElement('li');
+        itemCarrito.className = "list-group-item text-right mx-2";
+        itemCarrito.append (`${numeroUnidadesItem} x ${miItem[0].nombre} - ${miItem[0].precio}${divisa}`);
+
+        // Boton de borrar
+        const botonBorrar = document.createElement('button');
+        botonBorrar.className = "btn btn-danger mx-5";
+        botonBorrar.append ("X");
+        botonBorrar.style.marginLeft = '1rem';
+        botonBorrar.dataset.item = item;
+        botonBorrar.addEventListener('click', borrarItemCarrito);
+
+        itemCarrito.appendChild(botonBorrar);
+        seccionCarrito.appendChild(itemCarrito);
+    });
+
+    
+    total.append(calcularTotal());
+}
+
+
+function borrarItemCarrito(evento) {
+    
+    const id = evento.target.dataset.item;
+    
+    carrito = carrito.filter((carritoId) => {
+        return carritoId !== id;
+    });
+    
+    renderizarCarrito();
+}
+
+
+function calcularTotal() {
+     
+    return carrito.reduce((total, item) => {
+        
+        const miItem = productos.filter((producto) => {
+            return producto.id === parseInt(item);
+        });
+
+        return total + miItem[0].precio;
+    }, 0).toFixed(2);
+}
+
+
+function vaciarCarrito() {
+    // Limpiamos los productos guardados
+    carrito = [];
+    // Renderizamos los cambios
+    renderizarCarrito();
+}
+
+
+botonVaciar.addEventListener('click', vaciarCarrito);
+
+// Inicio
+
+renderizarCarrito();
+
+
+
+
+/*seccion carrito
 
 const verCarrito = () => {
 
@@ -65,4 +168,3 @@ const verCarrito = () => {
         document.body.appendChild(carrito);
     }
 */
-}

@@ -1,1 +1,0 @@
-btnAdd.onclick = verCarrito;
