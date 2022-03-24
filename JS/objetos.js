@@ -34,6 +34,6 @@ const linea15 = new productos(15, "Airflo", "Ridge Clear Agua Salada", "550 grai
 
 const productoLineas = [linea1, linea2, linea3, linea4, linea5,
     linea6, linea7, linea8, linea9, linea10,
-    linea11, linea12, linea13, linea14, linea15]
+    linea11, linea12, linea13, linea14, linea15];
 
-const productosCarrito = []
+const productosCarrito = [];

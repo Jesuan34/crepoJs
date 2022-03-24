@@ -1,1 +1,1 @@
-btnCarrito.onclick = mostrarCarrito;
+btnAdd.onclick = verCarrito;

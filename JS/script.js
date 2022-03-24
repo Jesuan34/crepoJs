@@ -6,30 +6,28 @@ for (const productos of productoLineas) {
     const divCardBody = document.createElement("div");
     const nombreProducto = document.createElement("h3");
     const precioProducto = document.createElement("h4");
-    const btnBuy = document.createElement("button");
+    const btnAdd = document.createElement("button");
 
     divCard.className = "col col-4 card";
     imgCard.className = "card-img-top";
     divCardBody.className = "card-body";
     nombreProducto.className = "card-title";
     precioProducto.className = "card-text";
-    btnBuy.className = "btn btn-primary";
+    btnAdd.className = "btn btn-primary";
 
-    imgCard.src = productos.img;
+    //imgCard.src = productos.img;
     nombreProducto.append(productos.marca, productos.modelo);
     precioProducto.append(`\$ ${productos.precio}`)
-    btnBuy.append("Comprar")
-    btnBuy.id = productos.id;
+    btnAdd.append("Comprar")
+    btnAdd.id = productos.id;
 
-    
-    btnBuy.onclick = () => {
-        const carritoCompra = productos.find(producto => producto.id === btnBuy.id);
-        productosCarrito.push({ nombre: carritoCompra.modelo, precio: productoCompra.precio })
-        localStorage.setItem("carrito", JSON.stringify(productosCarrito))
+    btnAdd.onclick = () => {
+        const comprado = productos.find(productos => productos.id === btnAdd.id);
+        productoCarrito.push({ nombre: comprado.modelo, precio: comprado.precio })
+        localStorage.setItem("carrito", JSON.stringify(productoCarrito))
     }
-    
 
-    divCardBody.append(nombreProducto, precioProducto, btnBuy);
+    divCardBody.append(nombreProducto, precioProducto, btnAdd);
 
     divCard.append(imgCard, divCardBody);
 
@@ -39,28 +37,32 @@ for (const productos of productoLineas) {
 
 //seccion carrito
 
-const carrito = document.createElement("div");
-carrito.className = "carrito";
-btnCarrito.className = "btn_carrito";
-btnCarrito.append("Carrito");
-carrito.append(btnCarrito);
-seccionCarrito.append(carrito);
+const verCarrito = () => {
 
+    const carrito = JSON.parse(localStorage.getItem("carrito"))
 
+    for (const productos of carrito) {
+      const nombreProducto = `<h4>Producto : ${productos.nombre}</h4>`
+      const precioProducto = `<h4>Precio : ${productos.precio}</h4>`
+      contenedorCarrito.innerHTML += nombreProducto
+      contenedorCarrito.innerHTML += precioProducto
+    }
 
-
-
-
-
-
-/*for (const productos of productoLineas) {
-    const contenedor = document.createElement("div");
-    //Definimos el innerHTML del elemento con una plantilla de texto
-    contenedor.innerHTML = `<div class= "card"> 
-                                <h3 class= "card-title"> Producto: ${productos.marca} ${productos.modelo}</h3>
-                                <p class= "card-text"> $ ${productos.precio} </p>
-                                <button class= "btn btn-primary"> Comprar </button>
-                            </div>`;
-    document.body.appendChild(contenedor);
-}
+    /*for (const productos of productosCarrito) {
+        const carrito = document.createElement("div");
+        carrito.innerHTML = `<div class= "card"> 
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                            <th scope="col"></th>
+                                            <th scope="col">Modelo: ${productos.modelo}</th>
+                                            <th scope="col">Precio: ${productos.precio}</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                    <button>Finalizar Compra</button>
+                                </div>`;
+        document.body.appendChild(carrito);
+    }
 */
+}
