@@ -1,57 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
 
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script src="js/sweetalert.js" async></script>
-    <script src="js/objetos.js" async></script>
-    <script src="js/script.js" async></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="js/sweetalert.js" async></script>
+  <script src="js/script.js" async></script>
 
-    <title>Document</title>
+  <title>E-Commerce</title>
 </head>
 
 <body>
-    <br>
+  <div class="container">
+    <div class="row">
 
-    <main class="container">
+      <main id="items" class="col-sm-8 row"></main>
 
-        <div class="row" id="General">
+      <aside class="col-sm-4">
+        <h2>Carrito</h2>
 
-            <div class="col-sm-8 row" id="seccionGeneral">
+        <ul id="carrito" class="list-group"></ul>
+        <hr>
 
+        <p class="text-right">Total: <span id="total"></span>$</p>
+        <button id="boton-vaciar" class="btn btn-danger">Vaciar</button>
+        <button id="boton-comprar" class="btn btn-danger">Comprar</button>
+      </aside>
 
+    </div>
 
-            </div>
-
-
-            <aside class="col-sm-4" id="secctionCarrito">
-
-                <button id="botonCarrito">Carrito</button>
-
-                <div id="contenedorCarrito">
-
-                    <h2>Carrito</h2>
-                    <ul id="listaCarrito" class="list-group"></ul>
-                    <hr>
-                    <p class="text-right">Total: <span id="totalCompra"></span>$</p>
-                    <button id="botonComprar" class="btn btn-danger">Comprar</button>
-                    <button id="botonVaciar" class="btn btn-danger">Vaciar Carrito</button>
-
-                </div>
-
-            </aside>
-
-        </div>
-
-    </main>
+  </div>
 
 </body>
 
