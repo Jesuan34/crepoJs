@@ -1,177 +1,203 @@
 
 
-if (!localStorage.getItem('productoLineas')) localStorage.setItem('productoLineas', JSON.stringify(productoLineas));
 
 
-const renderizarTienda = (objetoProductos) => {
+document.addEventListener('DOMContentLoaded', () => {
 
-    seccionGeneral.innerHTML = " ";
-
-    for (const productos of objetoProductos) {
-        const divCard = document.createElement("div");
-        divCard.className = "col col-4 card m-3";
-
-        const imgCard = document.createElement("img");
-        imgCard.className = "card-img-top";
-        //imgCard.src = productos.img;
-
-        const divCardBody = document.createElement("div");
-        divCardBody.className = "card-body";
-
-        const nombreProducto = document.createElement("h3");
-        nombreProducto.className = "card-title";
-        nombreProducto.append(productos.marca, productos.modelo);
-
-        const precioProducto = document.createElement("h4");
-        precioProducto.className = "card-text";
-        precioProducto.append(`\$ ${productos.precio}`);
-
-        const btnCard = document.createElement("button");
-        btnCard.className = "btn btn-primary";
-        btnCard.append("Comprar");
-        btnCard.id = productos.id;
-
-        btnCard.onclick = () => {
-            const productoComprado = productoLineas.find(productos => productos.id === btnCard.id);
-            carrito.push({ marca: productos.marca, modelo: productos.modelo, precio: productos.precio, id: productos.id });
-            localStorage.setItem("carrito", JSON.stringify(carrito))
+  
+    const baseDeDatos = [
+        {
+            id: 1,
+            nombre: 'Papa',
+            precio: 120,
+            imagen: 'img/papa.jpg'
+        },
+        {
+            id: 2,
+            nombre: 'Cebolla',
+            precio: 90,
+            imagen: 'img/cebolla.jpg'
+        },
+        {
+            id: 3,
+            nombre: 'Calabaza',
+            precio: 135,
+            imagen: 'img/calabaza.jpg'
+        },
+        {
+            id: 4,
+            nombre: 'Frutilla',
+            precio: 800,
+            imagen: 'img/fresa.jpg'
         }
-
-
-        divCardBody.append(nombreProducto, precioProducto, btnCard);
-
-        divCard.append(imgCard, divCardBody);
-
-        seccionGeneral.append(divCard);
-
-    }
-}
-
-renderizarTienda(JSON.parse(localStorage.getItem('productoLineas')))
-
-
-
-const mostrarCarrito = () => {
-
-    const carrito = JSON.parse(localStorage.getItem("carrito"))
-
-    for (const productos of carrito) {
-        const nombreProducto = document.createElement("li");
-        nombreProducto.className = "list-group-item text-right mx-1";
-        nombreProducto.append(`${productos.marca} ${productos.modelo} $${productos.precio}`);
-
-        const br = document.createElement("br");
-        listaCarrito.append(nombreProducto, br,);
-    }
-
-    const total = carrito.reduce((accumulador, producto) => accumulador + producto.precio, 0);
-    totalCompra.append(`$${total}`);
-}
-
-mostrarCarrito();
-
-
-
-
-
-/*const renderizarCarrito = () => {
-
-    const carrito = JSON.parse(localStorage.getItem("carrito"))
+  
+    ];
+  
+    let carrito = [];
+    const divisa = '$';
+    const DOMitems = document.querySelector('#items');
+    const DOMcarrito = document.querySelector('#carrito');
+    const DOMtotal = document.querySelector('#total');
+    const DOMbotonVaciar = document.querySelector('#boton-vaciar');
+    const DOMbotonComprar = document.querySelector('#boton-comprar');
+    const miLocalStorage = window.localStorage;
+  
     
-
-    for (const productos of carrito) {
+    function renderizarProductos() {
+        baseDeDatos.forEach((info) => {
+            
+            const miNodo = document.createElement('div');
+            miNodo.classList.add('card', 'col-sm-4');
+            
+            const miNodoCardBody = document.createElement('div');
+            miNodoCardBody.classList.add('card-body');
+            
+            const miNodoTitle = document.createElement('h5');
+            miNodoTitle.classList.add('card-title');
+            miNodoTitle.textContent = info.nombre;
+            
+            const miNodoImagen = document.createElement('img');
+            miNodoImagen.classList.add('img-fluid');
+            miNodoImagen.setAttribute('src', info.imagen);
+            
+            const miNodoPrecio = document.createElement('p');
+            miNodoPrecio.classList.add('card-text');
+            miNodoPrecio.textContent = `${info.precio}${divisa}`;
+             
+            const miNodoBoton = document.createElement('button');
+            miNodoBoton.classList.add('btn', 'btn-primary');
+            miNodoBoton.textContent = '+';
+            miNodoBoton.setAttribute('marcador', info.id);
+            miNodoBoton.addEventListener('click', anyadirProductoAlCarrito);
+            
+            miNodoCardBody.appendChild(miNodoImagen);
+            miNodoCardBody.appendChild(miNodoTitle);
+            miNodoCardBody.appendChild(miNodoPrecio);
+            miNodoCardBody.appendChild(miNodoBoton);
+            miNodo.appendChild(miNodoCardBody);
+            DOMitems.appendChild(miNodo);
+        });
+    }
+  
+    
+    function anyadirProductoAlCarrito(evento) {
         
-
-        const numeroUnidades = carrito.reduce((total, productoId) => {
-            return productoId === productos.id ? total += 1 : total;
-        }, 0);
-
-        const nombreProducto = document.createElement("li");
-        nombreProducto.className = "list-group-item text-right mx-1";
-        nombreProducto.append(`${numeroUnidades} x ${productos.marca} ${productos.modelo} $${productos.precio}`);
-
-        const br = document.createElement("br");
-        listaCarrito.append(nombreProducto, br,);
-
-
-        const total = carrito.reduce((accumulador, producto) => accumulador + producto.precio, 0);
-        totalCompra.append(`$${total}`);
-        //contenedorTienda.className += ' hidden';
-        //contenedorCarrito.classList.remove("hidden")
-
-
-
-
-        // Boton de borrar
-        const botonBorrar = document.createElement('button');
-        botonBorrar.className = "btn btn-danger mx-5";
-        botonBorrar.append("X");
-        botonBorrar.style.marginLeft = '1rem';
-        botonBorrar.dataset.item = item;
-        botonBorrar.addEventListener('click', borrarItemCarrito);
-
-        nombreProducto.appendChild(botonBorrar);
-        seccionCarrito.appendChild(nombreProducto);
+        carrito.push(evento.target.getAttribute('marcador'))
+         
+        renderizarCarrito();
+        
+        guardarCarritoEnLocalStorage();
     }
-}
-
-
-function borrarItemCarrito(evento) {
-
-    const id = evento.target.dataset.item;
-
-    carrito = carrito.filter((carritoId) => {
-        return carritoId !== id;
-    });
-
+  
+    
+    function renderizarCarrito() {
+        
+        DOMcarrito.textContent = '';
+        
+        const carritoSinDuplicados = [...new Set(carrito)];
+        
+        carritoSinDuplicados.forEach((item) => {
+            
+            const miItem = baseDeDatos.filter((itemBaseDatos) => {
+                
+                return itemBaseDatos.id === parseInt(item);
+            });
+            
+            const numeroUnidadesItem = carrito.reduce((total, itemId) => {
+                
+                return itemId === item ? total += 1 : total;
+            }, 0);
+            
+            const miNodo = document.createElement('li');
+            miNodo.classList.add('list-group-item', 'text-right', 'mx-2');
+            miNodo.textContent = `${numeroUnidadesItem} x ${miItem[0].nombre} - ${miItem[0].precio}${divisa}`;
+            
+            const miBoton = document.createElement('button');
+            miBoton.classList.add('btn', 'btn-danger', 'mx-5');
+            miBoton.textContent = 'X';
+            miBoton.style.marginLeft = '1rem';
+            miBoton.dataset.item = item;
+            miBoton.addEventListener('click', borrarItemCarrito);
+            
+            miNodo.appendChild(miBoton);
+            DOMcarrito.appendChild(miNodo);
+        });
+        
+        DOMtotal.textContent = calcularTotal();
+    }
+  
+    
+    function borrarItemCarrito(evento) {
+        
+        const id = evento.target.dataset.item;
+        
+        carrito = carrito.filter((carritoId) => {
+            return carritoId !== id;
+        });
+        
+        renderizarCarrito();
+        
+        guardarCarritoEnLocalStorage();
+  
+    }
+  
+    
+    function calcularTotal() {
+         
+        return carrito.reduce((total, item) => {
+            
+            const miItem = baseDeDatos.filter((itemBaseDatos) => {
+                return itemBaseDatos.id === parseInt(item);
+            });
+            
+            return total + miItem[0].precio;
+        }, 0).toFixed(2);
+    }
+  
+    
+    function vaciarCarrito() {
+        
+        carrito = [];
+        
+        renderizarCarrito();
+        
+        localStorage.clear();
+  
+    }
+  
+    function guardarCarritoEnLocalStorage () {
+        miLocalStorage.setItem('carrito', JSON.stringify(carrito));
+    }
+  
+    function cargarCarritoDeLocalStorage () {
+        
+        if (miLocalStorage.getItem('carrito') !== null) {
+            
+            carrito = JSON.parse(miLocalStorage.getItem('carrito'));
+        }
+    }
+  
+    
+    DOMbotonVaciar.addEventListener('click', vaciarCarrito);
+  
+    
+    cargarCarritoDeLocalStorage();
+    renderizarProductos();
     renderizarCarrito();
-}
-
-
-
-function vaciarCarrito() {
-
-    carrito = [];
-
-    renderizarCarrito();
-}
-
-
-botonVaciar.addEventListener('click', vaciarCarrito);
-
-
-renderizarCarrito();
-*/
-
-
-
-/*seccion carrito
-
-const verCarrito = () => {
-
-    const carrito = JSON.parse(localStorage.getItem("carrito"))
-
-    for (const productos of carrito) {
-      const nombreProducto = `<h4>Producto : ${productos.nombre}</h4>`
-      const precioProducto = `<h4>Precio : ${productos.precio}</h4>`
-      contenedorCarrito.innerHTML += nombreProducto
-      contenedorCarrito.innerHTML += precioProducto
-    }
-
-    /*for (const productos of productosCarrito) {
-        const carrito = document.createElement("div");
-        carrito.innerHTML = `<div class= "card"> 
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                            <th scope="col"></th>
-                                            <th scope="col">Modelo: ${productos.modelo}</th>
-                                            <th scope="col">Precio: ${productos.precio}</th>
-                                            </tr>
-                                        </thead>
-                                    </table>
-                                    <button>Finalizar Compra</button>
-                                </div>`;
-        document.body.appendChild(carrito);
-    }
-*/
+  
+    DOMbotonComprar.onclick = () => {
+      swal({
+          title: "Felicitaciones",
+          text: "Finalizaste tu compra, el envio llegara en los proximos días por el trasporte seleccionado",
+          icon: "success",
+      })
+  };
+  
+  DOMbotonVaciar.onclick = () => {
+      swal({
+          title: "Esta seguro que desa vaciar el carrito",
+          icon: "warning",
+          buttons: ["No estoy seguro", "Estoy seguro"],
+      })
+  };
+  });
